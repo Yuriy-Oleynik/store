@@ -10,7 +10,7 @@ public class Thing {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
-    private int price;
+    private int quantity;
 
     @OneToMany
     private List<ThingInOrder> thingInOrders;
@@ -31,12 +31,12 @@ public class Thing {
         this.name = name;
     }
 
-    public int getPrice() {
-        return price;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setQuantity(int price) {
+        this.quantity = quantity;
     }
 
     public List<ThingInOrder> getThingInOrders() {

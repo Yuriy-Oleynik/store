@@ -19,7 +19,7 @@ public class ThingsManagerBean {
     public Thing createThing(String name, int price){
         Thing thing = new Thing();
         thing.setName(name);
-        thing.setPrice(price);
+        thing.setQuantity(price);
         entityManager.persist(thing);
 
         return thing;
