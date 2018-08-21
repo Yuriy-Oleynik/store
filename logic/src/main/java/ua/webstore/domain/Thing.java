@@ -12,7 +12,7 @@ public class Thing {
     private String name;
     private int quantity;
 
-    @OneToMany
+    @OneToMany(mappedBy = "thing")
     private List<ThingInOrder> thingInOrders;
 
     public long getId() {
