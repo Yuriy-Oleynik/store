@@ -39,15 +39,16 @@ public class OrdersManagerBean {
         }
 
         ThingInOrder thingInOrder = new ThingInOrder();
-        thingInOrder.setOrder(order);
         thingInOrder.setThing(thing);
+        thingInOrder.setOrder(order);
         thingInOrder.setQuantity(quantity);
+
         entityManager.persist(thingInOrder);
 
         return true;
     }
 
-    public List<Thing> getThingInOrder(long orderId){
+    public List<Thing> getThingsInOrder(long orderId){
         Order order = entityManager.find(Order.class, orderId);
         if(order == null){
             return Collections.emptyList();
@@ -55,6 +56,7 @@ public class OrdersManagerBean {
 
         List<ThingInOrder> thingInOrders = order.getThingInOrders();
         List<Thing> result = new ArrayList<>();
+
         for(ThingInOrder thingInOrder : thingInOrders){
             result.add(thingInOrder.getThing());
         }

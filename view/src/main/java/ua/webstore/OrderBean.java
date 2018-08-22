@@ -15,6 +15,7 @@ import java.util.List;
 @Named
 @SessionScoped
 public class OrderBean implements Serializable {
+
     private Order order;
     private String name;
     private int quantity;
@@ -68,6 +69,6 @@ public class OrderBean implements Serializable {
             return Collections.emptyList();
         }
 
-        return ordersManagerBean.getThingInOrder(order.getId());
+        return ordersManagerBean.getThingsInOrder(order.getId());
     }
 }

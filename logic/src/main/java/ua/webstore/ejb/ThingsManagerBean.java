@@ -13,13 +13,14 @@ import java.util.List;
 @Stateless
 @LocalBean
 public class ThingsManagerBean {
+
     @PersistenceContext(unitName = "examplePU")
     private EntityManager entityManager;
 
-    public Thing createThing(String name, int price){
+    public Thing createThing(String name, int quantity){
         Thing thing = new Thing();
         thing.setName(name);
-        thing.setQuantity(price);
+        thing.setQuantity(quantity);
         entityManager.persist(thing);
 
         return thing;
