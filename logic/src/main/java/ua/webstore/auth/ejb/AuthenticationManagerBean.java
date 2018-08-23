@@ -1,6 +1,7 @@
 package ua.webstore.auth.ejb;
 
 import org.apache.commons.lang3.StringUtils;
+import ua.webstore.auth.domain.Admin;
 import ua.webstore.auth.domain.Credentials;
 import ua.webstore.auth.domain.User;
 
@@ -32,6 +33,28 @@ public class AuthenticationManagerBean {
 
         User user = credentials.getUser();
         if(user == null){
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean loginAsAdmin(String email, String password) {
+        if (StringUtils.isEmpty(email) || StringUtils.isEmpty(password)) {
+            return false;
+        }
+
+        Credentials credentials = entityManager.find(Credentials.class, email);
+        if (credentials == null) {
+            return false;
+        }
+
+        if(!password.equals(credentials.getPassword())){
+            return false;
+        }
+
+        Admin admin = credentials.getAdmin();
+        if(admin == null){
             return false;
         }
 
