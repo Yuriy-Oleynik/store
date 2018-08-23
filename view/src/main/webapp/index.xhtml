@@ -28,6 +28,8 @@
             </tr>
         </table>
 
+        <h1>Created Things</h1>
+
         <h:dataTable value="#{orderBean.things}" var="thing">
             <h:column>
                 <h:outputText value="#{thing.name}"/>
@@ -40,6 +42,9 @@
             </h:column>
         </h:dataTable>
     </h:form>
+
+    <h1>Added Things</h1>
+
     <h:dataTable value="#{orderBean.thingsInOrder}" var="thing">
         <h:column>
             <h:outputText value="#{thing.name}"/>
