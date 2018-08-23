@@ -35,7 +35,7 @@ public class Thing {
         return quantity;
     }
 
-    public void setQuantity(int price) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 

@@ -45,7 +45,7 @@ public class OrderBean implements Serializable {
 
     public void createOrder() {
         if (order == null) {
-            ordersManagerBean.createOrder();
+            order = ordersManagerBean.createOrder();
         }
     }
 

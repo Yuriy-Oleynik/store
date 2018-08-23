@@ -39,8 +39,8 @@ public class OrdersManagerBean {
         }
 
         ThingInOrder thingInOrder = new ThingInOrder();
-        thingInOrder.setThing(thing);
         thingInOrder.setOrder(order);
+        thingInOrder.setThing(thing);
         thingInOrder.setQuantity(quantity);
 
         entityManager.persist(thingInOrder);
