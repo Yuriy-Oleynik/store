@@ -1,9 +1,9 @@
 package ua.webstore;
 
 import ua.webstore.domain.Order;
-import ua.webstore.domain.Thing;
+import ua.webstore.domain.Product;
 import ua.webstore.ejb.OrdersManagerBean;
-import ua.webstore.ejb.ThingsManagerBean;
+import ua.webstore.ejb.ProductsManagerBean;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -25,7 +25,7 @@ public class OrderBean implements Serializable {
     private OrdersManagerBean ordersManagerBean;
 
     @EJB
-    private ThingsManagerBean thingsManagerBean;
+    private ProductsManagerBean productsManagerBean;
 
     public String getName() {
         return name;
@@ -49,26 +49,26 @@ public class OrderBean implements Serializable {
         }
     }
 
-    public void createThing() {
-        thingsManagerBean.createThing(name, quantity);
+    public void createProduct() {
+        productsManagerBean.createProduct(name, quantity);
     }
 
-    public List<Thing> getThings() {
-        return thingsManagerBean.getThings();
+    public List<Product> getProducts() {
+        return productsManagerBean.getProduct();
     }
 
-    public void addThing(Thing thing) {
+    public void addProduct(Product product) {
         if (order == null) {
             return;
         }
-        ordersManagerBean.addToOrder(thing.getId(), order.getId(), 1);
+        ordersManagerBean.addToOrder(product.getId(), order.getId(), 1);
     }
 
-    public List<Thing> getThingsInOrder(){
+    public List<Product> getProductsInOrder(){
         if(order == null){
             return Collections.emptyList();
         }
 
-        return ordersManagerBean.getThingsInOrder(order.getId());
+        return ordersManagerBean.getProductsInOrder(order.getId());
     }
 }

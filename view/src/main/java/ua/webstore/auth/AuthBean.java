@@ -72,7 +72,7 @@ public class AuthBean implements Serializable {
 
         loggedIn = authenticationManagerBean.loginAsUser(login, password);
 
-        if(loggedIn){
+        if (loggedIn) {
             try {
                 FacesContext.getCurrentInstance().getExternalContext().redirect(requestedPage);
             } catch (IOException e) {
