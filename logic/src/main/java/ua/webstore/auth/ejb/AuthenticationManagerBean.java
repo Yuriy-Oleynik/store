@@ -3,7 +3,7 @@ package ua.webstore.auth.ejb;
 import org.apache.commons.lang3.StringUtils;
 import ua.webstore.auth.domain.Admin;
 import ua.webstore.auth.domain.Credentials;
-import ua.webstore.auth.domain.User;
+import ua.webstore.auth.domain.ShopUser;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -31,8 +31,8 @@ public class AuthenticationManagerBean {
             return false;
         }
 
-        User user = credentials.getUser();
-        if(user == null){
+        ShopUser shopUser = credentials.getShopUser();
+        if(shopUser == null){
             return false;
         }
 

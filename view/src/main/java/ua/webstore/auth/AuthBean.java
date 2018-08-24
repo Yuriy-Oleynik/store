@@ -5,7 +5,9 @@ import ua.webstore.auth.ejb.AuthenticationManagerBean;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import java.io.IOException;
 import java.io.Serializable;
 
 @Named
@@ -18,6 +20,8 @@ public class AuthBean implements Serializable {
 
     @EJB
     private AuthenticationManagerBean authenticationManagerBean;
+
+    private String requestedPage;
 
     public boolean isLoggedIn() {
 
@@ -49,6 +53,16 @@ public class AuthBean implements Serializable {
         this.password = password;
     }
 
+    public String getRequestedPage() {
+
+        return requestedPage;
+    }
+
+    public void setRequestedPage(String requestedPage) {
+
+        this.requestedPage = requestedPage;
+    }
+
     public void doLogin() {
 
         if (StringUtils.isEmpty(login) || StringUtils.isEmpty(password)) {
@@ -57,6 +71,14 @@ public class AuthBean implements Serializable {
         }
 
         loggedIn = authenticationManagerBean.loginAsUser(login, password);
+
+        if(loggedIn){
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect(requestedPage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }

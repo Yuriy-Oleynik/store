@@ -15,7 +15,7 @@ public class Credentials {
     private Admin admin;
 
     @OneToOne(mappedBy = "credentials")
-    private User user;
+    private ShopUser shopUser;
 
     public String getEmail() {
         return email;
@@ -41,11 +41,11 @@ public class Credentials {
         this.admin = admin;
     }
 
-    public User getUser() {
-        return user;
+    public ShopUser getShopUser() {
+        return shopUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setShopUser(ShopUser shopUser) {
+        this.shopUser = shopUser;
     }
 }

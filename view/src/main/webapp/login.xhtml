@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   Created by IntelliJ IDEA.
-  User: Юрий
+  ShopUser: Юрий
   Date: 23.08.2018
   Time: 18:59
 -->
@@ -17,14 +17,16 @@
 </h:head>
 
 <h:body>
-    <p:dialog header="Enter Login and Password" widgetVar="dlg" modal="true" height="100">
-        <h:panelGrid>
-            <h:outputText value="Email"/>
-            <p:inputText value="#{authBean.login}"/>
-            <h:outputText value="Password"/>
-            <p:inputText value="#{authBean.password}"/>
-            <p:commandButton value="Enter" action="#{authBean.doLogin()}"/>
-        </h:panelGrid>
+    <p:dialog header="Enter Login and Password" widgetVar="dlg" modal="true" visible="true" closable="false">
+        <h:form>
+            <h:panelGrid>
+                <h:outputText value="Email"/>
+                <p:inputText value="#{authBean.login}"/>
+                <h:outputText value="Password"/>
+                <p:inputText value="#{authBean.password}"/>
+                <p:commandButton value="Enter" action="#{authBean.doLogin()}"/>
+            </h:panelGrid>
+        </h:form>
     </p:dialog>
 </h:body>
 
