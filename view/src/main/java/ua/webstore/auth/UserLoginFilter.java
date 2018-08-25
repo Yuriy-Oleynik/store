@@ -1,5 +1,7 @@
 package ua.webstore.auth;
 
+import ua.webstore.auth.domain.Role;
+
 import javax.inject.Inject;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -7,8 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = "/user/*")
+@WebFilter(urlPatterns = {UserLoginFilter.USER_FILTER_URI + "*", UserLoginFilter.ADMIN_FILTER_URI + "*"})
 public class UserLoginFilter implements Filter {
+
+    public static final String USER_FILTER_URI = "/user/";
+    public static final String ADMIN_FILTER_URI = "/admin/";
 
     @Inject
     private AuthBean authBean;
@@ -24,7 +29,14 @@ public class UserLoginFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpServletRequest request = (HttpServletRequest) servletRequest;
 
-        if (authBean.isLoggedIn()) {
+        if (authBean.getRole() != null) {
+            String uri = request.getRequestURI();
+            String beginOfAdminUri = request.getContextPath() + ADMIN_FILTER_URI;
+            if (uri.startsWith(beginOfAdminUri) && authBean.getRole() != Role.ADMIN) {
+                response.sendRedirect(request.getContextPath() + "/errors.xhtml");
+                return;
+            }
+
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }

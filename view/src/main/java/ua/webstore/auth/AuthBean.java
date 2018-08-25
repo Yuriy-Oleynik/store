@@ -1,6 +1,8 @@
 package ua.webstore.auth;
 
 import org.apache.commons.lang3.StringUtils;
+import ua.webstore.auth.domain.Role;
+import ua.webstore.auth.domain.ShopUser;
 import ua.webstore.auth.ejb.AuthenticationManagerBean;
 
 import javax.ejb.EJB;
@@ -14,7 +16,7 @@ import java.io.Serializable;
 @SessionScoped
 public class AuthBean implements Serializable {
 
-    private boolean loggedIn;
+    private Role role;
     private String login;
     private String password;
 
@@ -23,14 +25,14 @@ public class AuthBean implements Serializable {
 
     private String requestedPage;
 
-    public boolean isLoggedIn() {
+    public Role getRole() {
 
-        return loggedIn;
+        return role;
     }
 
-    public void setLoggedIn(boolean loggedIn) {
+    public void setRole(Role role) {
 
-        this.loggedIn = loggedIn;
+        this.role = role;
     }
 
     public String getLogin() {
@@ -66,13 +68,13 @@ public class AuthBean implements Serializable {
     public void doLogin() {
 
         if (StringUtils.isEmpty(login) || StringUtils.isEmpty(password)) {
-            loggedIn = false;
+            role = null;
             return;
         }
 
-        loggedIn = authenticationManagerBean.loginAsUser(login, password);
+        role = authenticationManagerBean.login(login, password);
 
-        if (loggedIn) {
+        if (role != null) {
             try {
                 FacesContext.getCurrentInstance().getExternalContext().redirect(requestedPage);
             } catch (IOException e) {
